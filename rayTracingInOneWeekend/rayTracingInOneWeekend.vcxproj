@@ -127,12 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="camera.c" />
     <ClCompile Include="ppmImage.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="ray.c" />
     <ClCompile Include="vec3.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="camera.h" />
     <ClInclude Include="ppmImage.h" />
     <ClInclude Include="ray.h" />
     <ClInclude Include="vec3.h" />

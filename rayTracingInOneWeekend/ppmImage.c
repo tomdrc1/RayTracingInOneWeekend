@@ -16,13 +16,15 @@ void ppmImageInit(PPMImage* image, const char* path, const unsigned short width,
 
     image->height = height;
     image->width = width;
+
+    fprintf(image->imageFile, "P3\n%d %d\n255\n", width, height);
 }
 
-void ppmImageWriteColour(PPMImage* image, Vec3 pixel)
+void ppmImageWriteColor(PPMImage* image, Vec3 pixelColor)
 {
-    int ir = (int)(255.999 * (double)pixel.x);
-    int ig = (int)(255.999 * (double)pixel.y);
-    int ib = (int)(255.999 * (double)pixel.z);
+    int ir = (int)(255.999 * (double)pixelColor.x);
+    int ig = (int)(255.999 * (double)pixelColor.y);
+    int ib = (int)(255.999 * (double)pixelColor.z);
 
     fprintf(image->imageFile, "%d %d %d\n", ir, ig, ib);
 }

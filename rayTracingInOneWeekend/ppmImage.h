@@ -13,5 +13,5 @@ typedef struct PPMImage
 } PPMImage;
 
 void ppmImageInit(PPMImage* image, const char* path, const unsigned short width, const unsigned short height);
-void ppmImageWriteColour(PPMImage* image, Vec3 pixel);
+void ppmImageWriteColor(PPMImage* image, Vec3 pixelColor);
 void ppmImageDestroy(PPMImage* image);
