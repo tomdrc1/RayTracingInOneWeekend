@@ -22,9 +22,9 @@ void cameraInit(Camera* camera, const unsigned int imageWidth)
 	camera->pixelDeltaU.y = viewportU.y / imageWidth;
 	camera->pixelDeltaU.z = viewportU.z / imageWidth;
 
-	camera->pixelDeltaV.x = viewportV.x / imageWidth;
-	camera->pixelDeltaV.y = viewportV.y / imageWidth;
-	camera->pixelDeltaV.z = viewportV.z / imageWidth;
+	camera->pixelDeltaV.x = viewportV.x / imageHeight;
+	camera->pixelDeltaV.y = viewportV.y / imageHeight;
+	camera->pixelDeltaV.z = viewportV.z / imageHeight;
 
 	Vec3 viewportUpperLeft = {
 		camera->center.x - (viewportU.x / 2) - (viewportV.x / 2),

@@ -9,4 +9,5 @@ typedef struct Vec3
 	double z;
 } Vec3;
 
-vec3Print(const Vec3* vec);
+double vec3Dot(const Vec3* vec, const Vec3* other);
+void vec3Print(const Vec3* vec);
