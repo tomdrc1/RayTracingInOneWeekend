@@ -129,9 +129,12 @@
   <ItemGroup>
     <ClCompile Include="ppmImage.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="ray.c" />
+    <ClCompile Include="vec3.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ppmImage.h" />
+    <ClInclude Include="ray.h" />
     <ClInclude Include="vec3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

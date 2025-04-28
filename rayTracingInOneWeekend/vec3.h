@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdio.h>
 
 typedef struct Vec3
 {
@@ -7,3 +8,5 @@ typedef struct Vec3
 	double y;
 	double z;
 } Vec3;
+
+vec3Print(const Vec3* vec);
