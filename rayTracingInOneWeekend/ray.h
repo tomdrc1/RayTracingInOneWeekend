@@ -9,3 +9,4 @@ typedef struct Ray
 } Ray;
 
 Vec3 rayAt(const Ray* ray, const double t);
+Vec3 rayColor(const Ray* ray);

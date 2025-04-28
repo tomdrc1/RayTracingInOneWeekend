@@ -18,27 +18,6 @@ void ppmImageInit(PPMImage* image, const char* path, const unsigned short width,
     image->width = width;
 }
 
-void ppmImageGenerateData(PPMImage* image)
-{
-    const int width = image->width;
-    const int height = image->height;
-    Vec3 pixelColor = { 0, 0, 0 };
-
-    fprintf(image->imageFile, "P3\n%d %d\n255\n", width, height);
-
-    for (int j = 0; j < width; j++)
-    {
-        for (int i = 0; i < height; i++)
-        {
-            pixelColor.x = (double)i / (double)(width - 1);
-            pixelColor.y = (double)j / (double)(height - 1);
-            pixelColor.z = 0.0;
-
-            ppmImageWriteColour(image, pixelColor);
-        }
-    }
-}
-
 void ppmImageWriteColour(PPMImage* image, Vec3 pixel)
 {
     int ir = (int)(255.999 * (double)pixel.x);
