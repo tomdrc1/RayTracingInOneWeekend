@@ -66,4 +66,6 @@ void cameraRender(Camera* camera)
 void cameraDestroy(Camera* camera)
 {
 	ppmImageDestroy(&camera->image);
+
+	memset(camera, NULL, sizeof(Camera));
 }
