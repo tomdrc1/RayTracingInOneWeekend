@@ -7,7 +7,6 @@
 #include "ray.h"
 
 #define IMAGE_NAME "image.ppm"
-#define ASPECT_RATIO (16.0 / 9.0)
 
 typedef struct Camera
 {
@@ -22,6 +21,6 @@ typedef struct Camera
 } Camera;
 
 
-void cameraInit(Camera* camera, const unsigned int imageWidth);
+void cameraInit(Camera* camera, const unsigned int imageWidth, const unsigned int imageHeight);
 void cameraRender(Camera* camera);
 void cameraDestroy(Camera* camera);

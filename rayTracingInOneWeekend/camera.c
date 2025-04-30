@@ -1,10 +1,7 @@
 #include "camera.h"
 
-void cameraInit(Camera* camera, const unsigned int imageWidth)
+void cameraInit(Camera* camera, const unsigned int imageWidth, const unsigned int imageHeight)
 {
-	int imageHeight = (int)((double)imageWidth / ASPECT_RATIO);
-	imageHeight = (imageHeight < 1) ? 1 : imageHeight;
-
 	ppmImageInit(&camera->image, IMAGE_NAME, imageWidth, imageHeight);
 
 	double focalLength = 1.0;
