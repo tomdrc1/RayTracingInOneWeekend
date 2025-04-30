@@ -1,6 +1,6 @@
 #include "ray.h"
 
-bool rayHitSphere(const Vec3 center, const double radius, const Ray* ray)
+double rayHitSphere(const Vec3 center, const double radius, const Ray* ray)
 {
 	Vec3 oc = {
 		center.x - ray->origin.x,
@@ -8,12 +8,19 @@ bool rayHitSphere(const Vec3 center, const double radius, const Ray* ray)
 		center.z - ray->origin.z
 	};
 
-	double a = vec3Dot(&ray->direction, &ray->direction);
-	double b = -2.0 * vec3Dot(&ray->direction, &oc);
-	double c = vec3Dot(&oc,& oc) - radius * radius;
-	double discriminant = b * b - 4.0 * a * c;
+	double a = vec3SquareLength(&ray->direction);
+	double h = vec3Dot(&ray->direction, &oc);
+	double c = vec3SquareLength(&oc) - radius * radius;
+	double discriminant = h * h - a * c;
 
-	return (discriminant >= 0);
+	if (discriminant < 0)
+	{
+		return -1.0;
+	}
+	else
+	{
+		return (h - sqrt(discriminant)) / a;
+	}
 }
 
 Vec3 rayAt(const Ray* ray, const double t)
@@ -32,9 +39,19 @@ Vec3 rayColor(const Ray* ray)
 	Vec3 color = { 0 };
 	Vec3 sphere = { 0, 0, -1};
 
-	if (rayHitSphere(sphere, 0.5, ray))
+	double t = rayHitSphere(sphere, 0.5, ray);
+	if (t > 0.0)
 	{
-		color.x = 1;
+		Vec3 at = rayAt(ray, t);
+		Vec3 N = {
+			at.x - sphere.x,
+			at.y - sphere.y,
+			at.z - sphere.z
+		};
+
+		color.x = 0.5 * (N.x + 1);
+		color.y = 0.5 * (N.y + 1);
+		color.z = 0.5 * (N.z + 1);
 
 		return color;
 	}

@@ -10,4 +10,5 @@ typedef struct Vec3
 } Vec3;
 
 double vec3Dot(const Vec3* vec, const Vec3* other);
+double vec3SquareLength(const Vec3* vec);
 void vec3Print(const Vec3* vec);

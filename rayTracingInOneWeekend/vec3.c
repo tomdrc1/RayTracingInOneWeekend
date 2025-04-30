@@ -7,6 +7,11 @@ double vec3Dot(const Vec3* vec, const Vec3* other)
         + vec->z * other->z;
 }
 
+double vec3SquareLength(const Vec3* vec)
+{
+    return (vec->x * vec->x) + (vec->y * vec->y) + (vec->z * vec->z);
+}
+
 void vec3Print(const Vec3* vec)
 {
 	printf("X: %f, Y: %f, Z: %f\n", vec->x, vec->y, vec->z);
