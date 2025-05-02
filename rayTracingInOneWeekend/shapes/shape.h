@@ -4,15 +4,11 @@
 
 #include "../ray.h"
 
-enum shapeType
+typedef enum shapeType { SHAPE_SPHERE, SHAPE_CUBE } shapeType;
+
+typedef struct Shape
 {
-	Sphere,
-	Cube
-};
-
-
-typedef struct Shape {
 	shapeType type;
 	void* data;
-	bool (*hitFunc)(const Ray* ray, const double ray_tmin, const double ray_tmax, HitRecord* recordOut);
+	bool (*hitFunc)(const struct Shape*, const Ray*, const double, const double, HitRecord*);
 } Shape;

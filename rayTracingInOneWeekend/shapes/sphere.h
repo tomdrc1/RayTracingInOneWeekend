@@ -3,8 +3,6 @@
 #include <stdbool.h>
 #include <math.h>
 
-#include "../ray.h"
-#include "../vec3.h"
 #include "shape.h"
 
 typedef struct Sphere
