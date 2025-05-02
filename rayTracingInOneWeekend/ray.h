@@ -5,6 +5,13 @@
 
 #include "vec3.h"
 
+typedef struct HitRecord
+{
+    Vec3 point;
+    Vec3 normal;
+    double t;
+} HitRecord;
+
 typedef struct Ray
 {
 	Vec3 origin;

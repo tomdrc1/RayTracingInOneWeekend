@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\shapes">
+      <UniqueIdentifier>{47b09dd3-d638-4b46-ae08-83c0b39d8529}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\shapes">
+      <UniqueIdentifier>{b207ca2f-d66b-4a1c-abb3-43e89542a6bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -30,6 +36,9 @@
     <ClCompile Include="camera.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="shapes\sphere.c">
+      <Filter>Source Files\shapes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ppmImage.h">
@@ -43,6 +52,12 @@
     </ClInclude>
     <ClInclude Include="camera.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shapes\shape.h">
+      <Filter>Header Files\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="shapes\sphere.h">
+      <Filter>Header Files\shapes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
