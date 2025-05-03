@@ -4,15 +4,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "ppmImage.h"
-#include "ray.h"
-
-#define IMAGE_NAME "image.ppm"
+#include "vec3.h"
 
 typedef struct Camera
 {
-	PPMImage image;
-
 	Vec3 center;
 
 	Vec3 pixelDeltaU;
@@ -23,5 +18,4 @@ typedef struct Camera
 
 
 void cameraInit(Camera* camera, const unsigned int imageWidth, const unsigned int imageHeight);
-void cameraRender(Camera* camera);
 void cameraDestroy(Camera* camera);

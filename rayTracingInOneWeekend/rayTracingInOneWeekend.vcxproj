@@ -133,6 +133,7 @@
     <ClCompile Include="ray.c" />
     <ClCompile Include="shapes\sphere.c" />
     <ClCompile Include="vec3.c" />
+    <ClCompile Include="world.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
@@ -141,6 +142,7 @@
     <ClInclude Include="shapes\shape.h" />
     <ClInclude Include="shapes\sphere.h" />
     <ClInclude Include="vec3.h" />
+    <ClInclude Include="world.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

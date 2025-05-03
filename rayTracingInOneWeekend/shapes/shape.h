@@ -2,13 +2,20 @@
 
 #include <stdbool.h>
 
-#include "../ray.h"
+#include "../vec3.h"
 
-typedef enum shapeType { SHAPE_SPHERE, SHAPE_CUBE } shapeType;
+struct Ray;
+struct HitRecord;
+
+typedef enum shapeType 
+{ 
+	SHAPE_SPHERE = 1, 
+	SHAPE_CUBE 
+} shapeType;
 
 typedef struct Shape
 {
 	shapeType type;
 	void* data;
-	bool (*hitFunc)(const struct Shape*, const Ray*, const double, const double, HitRecord*);
+	bool (*hitFunc)(const struct Shape*, const struct Ray*, const double, const double, struct HitRecord*);
 } Shape;

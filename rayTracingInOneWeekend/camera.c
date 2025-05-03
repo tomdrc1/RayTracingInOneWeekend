@@ -2,8 +2,6 @@
 
 void cameraInit(Camera* camera, const unsigned int imageWidth, const unsigned int imageHeight)
 {
-	ppmImageInit(&camera->image, IMAGE_NAME, imageWidth, imageHeight);
-
 	double focalLength = 1.0;
 	double viewportHeight = 2.0;
 	double viewportWidth = viewportHeight * ((double)imageWidth / (double)imageHeight);
@@ -34,38 +32,7 @@ void cameraInit(Camera* camera, const unsigned int imageWidth, const unsigned in
 	camera->pixel00Location.z = viewportUpperLeft.z + 0.5 * (camera->pixelDeltaU.z + camera->pixelDeltaV.z);
 }
 
-void cameraRender(Camera* camera)
-{
-	int i = 0;
-	int j = 0;
-
-	for (int j = 0; j < camera->image.height; j++)
-	{
-		for (int i = 0; i < camera->image.width; i++)
-		{
-			Vec3 pixelCenter = {
-				camera->pixel00Location.x + (i * camera->pixelDeltaU.x) + (j * camera->pixelDeltaV.x),
-				camera->pixel00Location.y + (i * camera->pixelDeltaU.y) + (j * camera->pixelDeltaV.y),
-				camera->pixel00Location.z + (i * camera->pixelDeltaU.z) + (j * camera->pixelDeltaV.z)
-			};
-
-			Vec3 rayDirection = {
-				pixelCenter.x - camera->center.x,
-				pixelCenter.y - camera->center.y,
-				pixelCenter.z - camera->center.z
-			};
-
-			Ray ray = { camera->center, rayDirection };
-
-			Vec3 pixelColor = rayColor(&ray);
-			ppmImageWriteColor(&camera->image, pixelColor);
-		}
-	}
-}
-
 void cameraDestroy(Camera* camera)
 {
-	ppmImageDestroy(&camera->image);
-
 	memset(camera, NULL, sizeof(Camera));
 }

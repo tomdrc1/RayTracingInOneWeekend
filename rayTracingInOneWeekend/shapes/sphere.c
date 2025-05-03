@@ -15,6 +15,11 @@ bool sphereHit(const Shape* shape, const Ray* ray, const double ray_tmin, const 
 	double c = vec3SquareLength(&oc) - sphere->radius * sphere->radius;
 	double discriminant = h * h - a * c;
 
+	if (discriminant <= 0)
+	{
+		return false;
+	}
+
 	double sqrtd = sqrt(discriminant);
 	double root = (h - sqrtd) / a;
 

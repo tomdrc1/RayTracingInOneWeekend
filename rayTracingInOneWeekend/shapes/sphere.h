@@ -4,6 +4,7 @@
 #include <math.h>
 
 #include "shape.h"
+#include "../ray.h"
 
 typedef struct Sphere
 {
