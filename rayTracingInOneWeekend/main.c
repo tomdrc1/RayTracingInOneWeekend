@@ -12,9 +12,11 @@ int main(int argc, char** argv)
 
 	World world;
 
-	worldInit(&world, imageWidth, imageHeight);
+	worldInit(&world, imageWidth, imageHeight, 10);
 
-	worldAddSphere(&world, SHAPE_SPHERE, (Vec3) { 0, 0, -1 }, 0.5);
+	worldAddSphere(&world, SHAPE_SPHERE, (Vec3){ 0, 0, -1 }, 0.5);
+	worldAddSphere(&world, SHAPE_SPHERE, (Vec3){ 0, -100.5, -1 }, 100);
+	worldAddSphere(&world, SHAPE_SPHERE, (Vec3) { 4, 1, -1 }, 2);
 	worldRender(&world);
 
 	worldDestroy(&world);

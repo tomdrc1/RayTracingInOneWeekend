@@ -1,11 +1,12 @@
 #include "world.h"
 
-void worldInit(World* world, const unsigned int imageWidth, const unsigned int imageHeight)
+void worldInit(World* world, const unsigned int imageWidth, const unsigned int imageHeight, const unsigned int shapeCount)
 {
 	cameraInit(&world->camera, imageWidth, imageHeight);
 	ppmImageInit(&world->image, IMAGE_NAME, imageWidth, imageHeight);
 
-	world->shapes = (Shape*)malloc(sizeof(Shape));
+	world->shapes = (Shape*)malloc(sizeof(Shape) * shapeCount);
+	world->shapeCount = 0;
 }
 
 void worldRender(World* world)
@@ -30,8 +31,10 @@ void worldRender(World* world)
 			};
 
 			Ray ray = { world->camera.center, rayDirection };
+			HitRecord rec = { 0 };
+			worldCastRay(world, &ray, &rec);
 
-			Vec3 pixelColor = rayColor(&ray, &world->shapes[0]);
+			Vec3 pixelColor = rayColor(&ray, &rec);
 			ppmImageWriteColor(&world->image, pixelColor);
 		}
 	}
@@ -39,11 +42,38 @@ void worldRender(World* world)
 
 void worldDestroy(World* world)
 {
-	free(world->shapes[0].data);
+	unsigned int i = 0;
+
+	for (i = 0; i < world->shapeCount; i++)
+	{
+		free(world->shapes[i].data);
+	}
+
 	free(world->shapes);
 
 	cameraDestroy(&world->camera);
 	ppmImageDestroy(&world->image);
+}
+
+bool worldCastRay(World* world, const Ray* ray, HitRecord* recordOut)
+{
+	unsigned int i = 0;
+	bool isHit = false;
+	double closest = (double)INFINITY;
+	HitRecord tempRecord = { 0 };
+
+	for (i = 0; i < world->shapeCount; i++)
+	{
+		if (world->shapes[i].hitFunc && world->shapes[i].hitFunc(&world->shapes[i], ray, 0, closest, &tempRecord))
+		{
+			isHit = true;
+			closest = tempRecord.t;
+
+			*recordOut = tempRecord;
+		}
+	}
+
+	return isHit;
 }
 
 void worldAddSphere(World* world, shapeType type, const Vec3 center, const double radius)
@@ -56,7 +86,9 @@ void worldAddSphere(World* world, shapeType type, const Vec3 center, const doubl
 
 	sphere->radius = radius;
 
-	world->shapes[0].type = type;
-	world->shapes[0].hitFunc = &sphereHit;
-	world->shapes[0].data = (void*)sphere;
+	world->shapes[world->shapeCount].type = type;
+	world->shapes[world->shapeCount].hitFunc = &sphereHit;
+	world->shapes[world->shapeCount].data = (void*)sphere;
+
+	world->shapeCount++;
 }

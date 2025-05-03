@@ -16,10 +16,12 @@ typedef struct World
 	Camera camera;
 
 	Shape* shapes;
+	unsigned int shapeCount;
 } World;
 
-void worldInit(World* world, const unsigned int imageWidth, const unsigned int imageHeight);
+void worldInit(World* world, const unsigned int imageWidth, const unsigned int imageHeight, const unsigned int shapeCount);
 void worldRender(World* world);
 void worldDestroy(World* world);
 
+bool worldCastRay(World* world, const Ray* ray, HitRecord* recordOut);
 void worldAddSphere(World* world, shapeType type, const Vec3 center, const double radius);
