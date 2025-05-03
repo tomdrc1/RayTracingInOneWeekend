@@ -36,9 +36,9 @@ bool sphereHit(const Shape* shape, const Ray* ray, const double rayTMin, const d
 	recordOut->point = rayAt(ray, recordOut->t);
 
 	recordOut->normal = (Vec3){ 
-		recordOut->point.x - sphere->center.x / sphere->radius,
-		recordOut->point.y - sphere->center.y / sphere->radius,
-		recordOut->point.z - sphere->center.z / sphere->radius,
+		(recordOut->point.x - sphere->center.x) / sphere->radius,
+		(recordOut->point.y - sphere->center.y) / sphere->radius,
+		(recordOut->point.z - sphere->center.z) / sphere->radius,
 	};
 	rayRecordSetFaceFormal(ray, recordOut);
 
