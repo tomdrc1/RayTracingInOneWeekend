@@ -78,7 +78,7 @@ bool worldCastRay(World* world, const Ray* ray, HitRecord* recordOut)
 	return isHit;
 }
 
-void worldAddSphere(World* world, shapeType type, const Vec3 center, const double radius)
+void worldAddSphere(World* world, const Vec3 center, const double radius)
 {
 	Sphere* sphere = (Sphere*)malloc(sizeof(Sphere));
 
@@ -88,7 +88,6 @@ void worldAddSphere(World* world, shapeType type, const Vec3 center, const doubl
 
 	sphere->radius = radius;
 
-	world->shapes[world->shapeCount].type = type;
 	world->shapes[world->shapeCount].hitFunc = &sphereHit;
 	world->shapes[world->shapeCount].data = (void*)sphere;
 

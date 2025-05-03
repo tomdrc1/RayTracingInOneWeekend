@@ -24,4 +24,4 @@ void worldRender(World* world);
 void worldDestroy(World* world);
 
 bool worldCastRay(World* world, const Ray* ray, HitRecord* recordOut);
-void worldAddSphere(World* world, shapeType type, const Vec3 center, const double radius);
+void worldAddSphere(World* world, const Vec3 center, const double radius);
