@@ -12,4 +12,4 @@ typedef struct Sphere
 	double radius;
 } Sphere;
 
-bool sphereHit(const Shape* shape, const Ray* ray, const double ray_tmin, const double ray_tmax, HitRecord* recordOut);
+bool sphereHit(const Shape* shape, const Ray* ray, const double rayTMin, const double rayTMax, HitRecord* recordOut);

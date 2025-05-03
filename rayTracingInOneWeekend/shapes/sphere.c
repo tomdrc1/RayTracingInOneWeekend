@@ -1,6 +1,6 @@
 #include "sphere.h"
 
-bool sphereHit(const Shape* shape, const Ray* ray, const double ray_tmin, const double ray_tmax, HitRecord* recordOut)
+bool sphereHit(const Shape* shape, const Ray* ray, const double rayTMin, const double rayTMax, HitRecord* recordOut)
 {
     Sphere* sphere = (Sphere*)shape->data;
 
@@ -23,10 +23,10 @@ bool sphereHit(const Shape* shape, const Ray* ray, const double ray_tmin, const 
 	double sqrtd = sqrt(discriminant);
 	double root = (h - sqrtd) / a;
 
-	if (root <= ray_tmin || ray_tmax <= root)
+	if (root <= rayTMin || rayTMax <= root)
 	{
 		root = (h + sqrtd) / a;
-		if (root <= ray_tmin || ray_tmax <= root)
+		if (root <= rayTMin || rayTMax <= root)
 		{
 			return false;
 		}
@@ -34,11 +34,13 @@ bool sphereHit(const Shape* shape, const Ray* ray, const double ray_tmin, const 
 
 	recordOut->t = root;
 	recordOut->point = rayAt(ray, recordOut->t);
+
 	recordOut->normal = (Vec3){ 
 		recordOut->point.x - sphere->center.x / sphere->radius,
 		recordOut->point.y - sphere->center.y / sphere->radius,
 		recordOut->point.z - sphere->center.z / sphere->radius,
 	};
+	rayRecordSetFaceFormal(ray, recordOut);
 
 	return true;
 }
