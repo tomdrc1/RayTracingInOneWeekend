@@ -4,7 +4,6 @@
 #include <stdbool.h>
 
 #include "vec3.h"
-#include "shapes/shape.h"
 
 typedef struct HitRecord
 {
@@ -20,4 +19,4 @@ typedef struct Ray
 } Ray;
 
 Vec3 rayAt(const Ray* ray, const double t);
-Vec3 rayColor(const Ray* ray, const Shape* shape);
+Vec3 rayColor(const Ray* ray, const HitRecord* hitRecord);
