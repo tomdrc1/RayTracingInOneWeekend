@@ -53,6 +53,8 @@ void worldDestroy(World* world)
 
 	cameraDestroy(&world->camera);
 	ppmImageDestroy(&world->image);
+
+	memset(world, NULL, sizeof(World));
 }
 
 bool worldCastRay(World* world, const Ray* ray, HitRecord* recordOut)
