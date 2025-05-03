@@ -32,8 +32,8 @@ void worldRender(World* world)
 
 			Ray ray = { world->camera.center, rayDirection };
 			HitRecord rec = { 0 };
-			worldCastRay(world, &ray, &rec);
-
+			rec.isHit = worldCastRay(world, &ray, &rec);
+			
 			Vec3 pixelColor = rayColor(&ray, &rec);
 			ppmImageWriteColor(&world->image, pixelColor);
 		}

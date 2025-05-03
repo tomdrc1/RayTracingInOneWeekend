@@ -10,6 +10,8 @@ typedef struct HitRecord
     Vec3 point;
     Vec3 normal;
     double t;
+    bool isFrontFace;
+    bool isHit;
 } HitRecord;
 
 typedef struct Ray
@@ -20,3 +22,5 @@ typedef struct Ray
 
 Vec3 rayAt(const Ray* ray, const double t);
 Vec3 rayColor(const Ray* ray, const HitRecord* hitRecord);
+
+void rayRecordSetFaceFormal(const Ray* ray, HitRecord* record);

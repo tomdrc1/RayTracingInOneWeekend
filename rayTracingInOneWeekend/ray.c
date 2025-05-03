@@ -15,7 +15,7 @@ Vec3 rayColor(const Ray* ray, const HitRecord* hitRecord)
 {
 	Vec3 color = { 0 };
 	
-	if (hitRecord->t)
+	if (hitRecord->isHit)
 	{
 		color.x = 0.5 * (hitRecord->normal.x + 1);
 		color.y = 0.5 * (hitRecord->normal.y + 1);
@@ -32,4 +32,16 @@ Vec3 rayColor(const Ray* ray, const HitRecord* hitRecord)
 	color.z = colorDelta * 1.0 + a * 1.0;
 
 	return color;
+}
+
+void rayRecordSetFaceFormal(const Ray* ray, HitRecord* record)
+{
+	record->isFrontFace = vec3Dot(&ray->direction, &record->normal) < 0;
+
+	if (!record->isFrontFace)
+	{
+		record->normal.x = -record->normal.x;
+		record->normal.y = -record->normal.y;
+		record->normal.z = -record->normal.z;
+	}
 }

@@ -16,7 +16,8 @@ int main(int argc, char** argv)
 
 	worldAddSphere(&world, SHAPE_SPHERE, (Vec3){ 0, 0, -1 }, 0.5);
 	worldAddSphere(&world, SHAPE_SPHERE, (Vec3){ 0, -100.5, -1 }, 100);
-	worldAddSphere(&world, SHAPE_SPHERE, (Vec3) { 4, 1, -1 }, 2);
+	worldAddSphere(&world, SHAPE_SPHERE, (Vec3) { 6, 2, -6 }, 2);
+	worldAddSphere(&world, SHAPE_SPHERE, (Vec3) { -4, 1, -3 }, 1.5);
 	worldRender(&world);
 
 	worldDestroy(&world);
