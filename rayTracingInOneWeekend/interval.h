@@ -10,3 +10,4 @@ typedef struct Interval
 
 
 bool intervalSurrounds(const Interval* interval, const double x);
+double intervalClamp(const Interval* interval, const double x);
