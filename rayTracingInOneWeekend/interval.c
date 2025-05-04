@@ -13,7 +13,7 @@ double intervalClamp(const Interval* interval, const double x)
     }
     else if (x > interval->max)
     {
-        return interval->max
+        return interval->max;
     }
 
     return x;
