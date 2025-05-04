@@ -140,6 +140,7 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="interval.h" />
     <ClInclude Include="ppmImage.h" />
+    <ClInclude Include="random.h" />
     <ClInclude Include="ray.h" />
     <ClInclude Include="shapes\shape.h" />
     <ClInclude Include="shapes\sphere.h" />

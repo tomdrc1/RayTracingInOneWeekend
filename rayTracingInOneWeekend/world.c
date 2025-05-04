@@ -2,33 +2,50 @@
 
 void worldInit(World* world, const unsigned int imageWidth, const unsigned int imageHeight, const unsigned int shapeCount)
 {
+	randomInit();
 	cameraInit(&world->camera, imageWidth, imageHeight);
 	ppmImageInit(&world->image, IMAGE_NAME, imageWidth, imageHeight);
 
 	world->shapes = (Shape*)malloc(sizeof(Shape) * shapeCount);
 	world->shapeCount = 0;
 
-	world->sampelsPerPixel = 10;
-	world->pixelSampelsScale = 1.0 / (double)world->pixelSampelsScale;
+	world->sampelsPerPixel = 100;
+	world->pixelSampelsScale = 1.0 / (double)world->sampelsPerPixel;
 }
 
 void worldRender(World* world)
 {
 	int i = 0;
 	int j = 0;
+	int sample = 0;
 
 	Ray ray = { 0 };
+	Vec3 pixelColor = { 0 };
 
-	for (int j = 0; j < world->image.height; j++)
+	for (j = 0; j < world->image.height; j++)
 	{
-		for (int i = 0; i < world->image.width; i++)
+		for (i = 0; i < world->image.width; i++)
 		{
-			worldGenerateRay(world, i, j, &ray);
-			
-			HitRecord rec = { 0 };
-			rec.isHit = worldCastRay(world, &ray, &rec);
-			
-			Vec3 pixelColor = rayColor(&ray, &rec);
+			pixelColor = (Vec3){ 0 };
+
+			for (sample = 0; sample < world->sampelsPerPixel; sample++)
+			{
+				worldGenerateRay(world, i, j, &ray);
+
+				HitRecord rec = { 0 };
+				rec.isHit = worldCastRay(world, &ray, &rec);
+
+				Vec3 tempPixelColor = rayColor(&ray, &rec);
+
+				pixelColor.x += tempPixelColor.x;
+				pixelColor.y += tempPixelColor.y;
+				pixelColor.z += tempPixelColor.z;
+			}
+
+
+			pixelColor.x *= world->pixelSampelsScale;
+			pixelColor.y *= world->pixelSampelsScale;
+			pixelColor.z *= world->pixelSampelsScale;
 			ppmImageWriteColor(&world->image, pixelColor);
 		}
 	}
@@ -53,10 +70,16 @@ void worldDestroy(World* world)
 
 void worldGenerateRay(World* world, const unsigned int i, const unsigned int j, Ray* out)
 {
+	Vec3 offset = {
+		randomDouble() - 0.5,
+		randomDouble() - 0.5,
+		0.0
+	};
+	
 	Vec3 pixelCenter = {
-	world->camera.pixel00Location.x + (i * world->camera.pixelDeltaU.x) + (j * world->camera.pixelDeltaV.x),
-	world->camera.pixel00Location.y + (i * world->camera.pixelDeltaU.y) + (j * world->camera.pixelDeltaV.y),
-	world->camera.pixel00Location.z + (i * world->camera.pixelDeltaU.z) + (j * world->camera.pixelDeltaV.z)
+		world->camera.pixel00Location.x + ((i + offset.x) * world->camera.pixelDeltaU.x) + ((j + offset.y) * world->camera.pixelDeltaV.x),
+		world->camera.pixel00Location.y + ((i + offset.x) * world->camera.pixelDeltaU.y) + ((j + offset.y) * world->camera.pixelDeltaV.y),
+		world->camera.pixel00Location.z + ((i + offset.x) * world->camera.pixelDeltaU.z) + ((j + offset.y) * world->camera.pixelDeltaV.z)
 	};
 
 	Vec3 rayDirection = {
