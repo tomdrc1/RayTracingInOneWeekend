@@ -4,6 +4,9 @@
 #include <stdlib.h>
 
 #include "vec3.h"
+#include "interval.h"
+
+static const Interval PPM_IMAGE_INTENSITY = { 0.000, 0.999 };
 
 typedef struct PPMImage
 {

@@ -22,9 +22,9 @@ void ppmImageInit(PPMImage* image, const char* path, const unsigned short width,
 
 void ppmImageWriteColor(PPMImage* image, Vec3 pixelColor)
 {
-    int ir = (int)(255.999 * (double)pixelColor.x);
-    int ig = (int)(255.999 * (double)pixelColor.y);
-    int ib = (int)(255.999 * (double)pixelColor.z);
+    int ir = (int)(256.0 * intervalClamp(&PPM_IMAGE_INTENSITY, (double)pixelColor.x));
+    int ig = (int)(256.0 * intervalClamp(&PPM_IMAGE_INTENSITY, (double)pixelColor.y));
+    int ib = (int)(256.0 * intervalClamp(&PPM_IMAGE_INTENSITY, (double)pixelColor.z));
 
     fprintf(image->imageFile, "%d %d %d\n", ir, ig, ib);
 }

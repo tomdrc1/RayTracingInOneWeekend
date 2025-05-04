@@ -4,6 +4,7 @@
 #include <math.h>
 
 #include "shape.h"
+#include "../interval.h"
 #include "../ray.h"
 
 typedef struct Sphere
@@ -12,4 +13,4 @@ typedef struct Sphere
 	double radius;
 } Sphere;
 
-bool sphereHit(const Shape* shape, const Ray* ray, const double rayTMin, const double rayTMax, HitRecord* recordOut);
+bool sphereHit(const Shape* shape, const Ray* ray, const Interval* interval, HitRecord* recordOut);

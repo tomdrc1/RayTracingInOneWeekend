@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="camera.c" />
+    <ClCompile Include="interval.c" />
     <ClCompile Include="ppmImage.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="ray.c" />
@@ -137,7 +138,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
+    <ClInclude Include="interval.h" />
     <ClInclude Include="ppmImage.h" />
+    <ClInclude Include="random.h" />
     <ClInclude Include="ray.h" />
     <ClInclude Include="shapes\shape.h" />
     <ClInclude Include="shapes\sphere.h" />
