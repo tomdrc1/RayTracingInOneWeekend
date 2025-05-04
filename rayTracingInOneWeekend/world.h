@@ -6,6 +6,7 @@
 #include "camera.h"
 #include "ppmImage.h"
 #include "ray.h"
+#include "interval.h"
 #include "shapes/sphere.h"
 
 #define IMAGE_NAME "image.ppm"

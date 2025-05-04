@@ -63,10 +63,14 @@ bool worldCastRay(World* world, const Ray* ray, HitRecord* recordOut)
 	bool isHit = false;
 	double closest = (double)INFINITY;
 	HitRecord tempRecord = { 0 };
+	Interval interval = { 0 };
 
 	for (i = 0; i < world->shapeCount; i++)
 	{
-		if (world->shapes[i].hitFunc && world->shapes[i].hitFunc(&world->shapes[i], ray, 0, closest, &tempRecord))
+		interval.min = 0;
+		interval.max = closest;
+
+		if (world->shapes[i].hitFunc && world->shapes[i].hitFunc(&world->shapes[i], ray, &interval, &tempRecord))
 		{
 			isHit = true;
 			closest = tempRecord.t;

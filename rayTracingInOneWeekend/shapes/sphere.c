@@ -1,6 +1,6 @@
 #include "sphere.h"
 
-bool sphereHit(const Shape* shape, const Ray* ray, const double rayTMin, const double rayTMax, HitRecord* recordOut)
+bool sphereHit(const Shape* shape, const Ray* ray, const Interval* interval, HitRecord* recordOut)
 {
     Sphere* sphere = (Sphere*)shape->data;
 
@@ -23,10 +23,10 @@ bool sphereHit(const Shape* shape, const Ray* ray, const double rayTMin, const d
 	double sqrtd = sqrt(discriminant);
 	double root = (h - sqrtd) / a;
 
-	if (root <= rayTMin || rayTMax <= root)
+	if (!intervalSurrounds(interval, root))
 	{
 		root = (h + sqrtd) / a;
-		if (root <= rayTMin || rayTMax <= root)
+		if (!intervalSurrounds(interval, root))
 		{
 			return false;
 		}
