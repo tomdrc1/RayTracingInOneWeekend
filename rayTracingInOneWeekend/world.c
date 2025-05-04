@@ -7,6 +7,9 @@ void worldInit(World* world, const unsigned int imageWidth, const unsigned int i
 
 	world->shapes = (Shape*)malloc(sizeof(Shape) * shapeCount);
 	world->shapeCount = 0;
+
+	world->sampelsPerPixel = 10;
+	world->pixelSampelsScale = 1.0 / (double)world->pixelSampelsScale;
 }
 
 void worldRender(World* world)
@@ -14,23 +17,14 @@ void worldRender(World* world)
 	int i = 0;
 	int j = 0;
 
+	Ray ray = { 0 };
+
 	for (int j = 0; j < world->image.height; j++)
 	{
 		for (int i = 0; i < world->image.width; i++)
 		{
-			Vec3 pixelCenter = {
-				world->camera.pixel00Location.x + (i * world->camera.pixelDeltaU.x) + (j * world->camera.pixelDeltaV.x),
-				world->camera.pixel00Location.y + (i * world->camera.pixelDeltaU.y) + (j * world->camera.pixelDeltaV.y),
-				world->camera.pixel00Location.z + (i * world->camera.pixelDeltaU.z) + (j * world->camera.pixelDeltaV.z)
-			};
-
-			Vec3 rayDirection = {
-				pixelCenter.x - world->camera.center.x,
-				pixelCenter.y - world->camera.center.y,
-				pixelCenter.z - world->camera.center.z
-			};
-
-			Ray ray = { world->camera.center, rayDirection };
+			worldGenerateRay(world, i, j, &ray);
+			
 			HitRecord rec = { 0 };
 			rec.isHit = worldCastRay(world, &ray, &rec);
 			
@@ -55,6 +49,24 @@ void worldDestroy(World* world)
 	ppmImageDestroy(&world->image);
 
 	memset(world, NULL, sizeof(World));
+}
+
+void worldGenerateRay(World* world, const unsigned int i, const unsigned int j, Ray* out)
+{
+	Vec3 pixelCenter = {
+	world->camera.pixel00Location.x + (i * world->camera.pixelDeltaU.x) + (j * world->camera.pixelDeltaV.x),
+	world->camera.pixel00Location.y + (i * world->camera.pixelDeltaU.y) + (j * world->camera.pixelDeltaV.y),
+	world->camera.pixel00Location.z + (i * world->camera.pixelDeltaU.z) + (j * world->camera.pixelDeltaV.z)
+	};
+
+	Vec3 rayDirection = {
+		pixelCenter.x - world->camera.center.x,
+		pixelCenter.y - world->camera.center.y,
+		pixelCenter.z - world->camera.center.z
+	};
+
+	out->origin = world->camera.center;
+	out->direction = rayDirection;
 }
 
 bool worldCastRay(World* world, const Ray* ray, HitRecord* recordOut)
