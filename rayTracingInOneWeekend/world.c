@@ -62,7 +62,7 @@ void worldCastRayAntialiasing(const World* world, const Vec2 pixelCoordinates, V
 
 	for (i = 0; i < world->sampelsPerPixel; i++)
 	{
-		cameraGenerateRay(&world->camera, (Vec2) {pixelCoordinates.x, pixelCoordinates.y}, &ray);
+		cameraGenerateRay(&world->camera, pixelCoordinates, &ray);
 
 		depth = world->camera.maxDepth;
 		Vec3 tempPixelColor = { 1.0, 1.0, 1.0};
