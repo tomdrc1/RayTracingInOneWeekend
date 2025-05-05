@@ -12,5 +12,5 @@ double randomDouble()
 
 double randomDoubleConfined(const double min, const double max)
 {
-	return min + (max - min) * random_double();
+	return min + (max - min) * randomDouble();
 }
