@@ -7,7 +7,10 @@
 #include "ppmImage.h"
 #include "ray.h"
 #include "interval.h"
-#include "random.h"
+
+#include "vec3.h"
+#include "vec2.h"
+
 #include "shapes/sphere.h"
 
 #define IMAGE_NAME "image.ppm"
@@ -28,7 +31,7 @@ void worldInit(World* world, const unsigned int imageWidth, const unsigned int i
 void worldRender(World* world);
 void worldDestroy(World* world);
 
-void worldGenerateRay(World* world, const unsigned int i, const unsigned int j, Ray* out);
+void worldCastRayAntialiasing(const World* world, const Vec2 pixelCoordinates, Vec3* pixelColorOut);
 
 bool worldCastRay(World* world, const Ray* ray, HitRecord* recordOut);
 void worldAddSphere(World* world, const Vec3 center, const double radius);

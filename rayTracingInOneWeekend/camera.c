@@ -32,6 +32,30 @@ void cameraInit(Camera* camera, const unsigned int imageWidth, const unsigned in
 	camera->pixel00Location.z = viewportUpperLeft.z + 0.5 * (camera->pixelDeltaU.z + camera->pixelDeltaV.z);
 }
 
+void cameraGenerateRay(const Camera* camera, const Vec2 PixelCoordinates, Ray* rayOut)
+{
+	Vec3 offset = {
+		randomDouble() - 0.5,
+		randomDouble() - 0.5,
+		0.0
+	};
+
+	Vec3 pixelCenter = {
+		camera->pixel00Location.x + ((PixelCoordinates.x + offset.x) * camera->pixelDeltaU.x) + ((PixelCoordinates.y + offset.y) * camera->pixelDeltaV.x),
+		camera->pixel00Location.y + ((PixelCoordinates.x + offset.x) * camera->pixelDeltaU.y) + ((PixelCoordinates.y + offset.y) * camera->pixelDeltaV.y),
+		camera->pixel00Location.z + ((PixelCoordinates.x + offset.x) * camera->pixelDeltaU.z) + ((PixelCoordinates.y + offset.y) * camera->pixelDeltaV.z)
+	};
+
+	Vec3 rayDirection = {
+		pixelCenter.x - camera->center.x,
+		pixelCenter.y - camera->center.y,
+		pixelCenter.z - camera->center.z
+	};
+
+	rayOut->origin = camera->center;
+	rayOut->direction = rayDirection;
+}
+
 void cameraDestroy(Camera* camera)
 {
 	memset(camera, NULL, sizeof(Camera));
