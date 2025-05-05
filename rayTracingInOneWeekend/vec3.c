@@ -41,7 +41,7 @@ Vec3 vec3RandomUnitVector()
     }
 }
 
-Vec3 randomOnHemisphere(const Vec3* normal)
+Vec3 vec3RandomOnHemisphere(const Vec3* normal)
 {
     Vec3 onUnitSphere = vec3RandomUnitVector();
 
