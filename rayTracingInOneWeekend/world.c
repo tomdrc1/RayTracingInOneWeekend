@@ -60,7 +60,7 @@ void worldCastRayAntialiasing(const World* world, const Vec2 pixelCoordinates, V
 
 	for (i = 0; i < world->sampelsPerPixel; i++)
 	{
-		cameraGenerateRay(&world->camera, (Vec2) {pixelCoordinates.x, pixelCoordinates.y}, & ray);
+		cameraGenerateRay(&world->camera, (Vec2) {pixelCoordinates.x, pixelCoordinates.y}, &ray);
 
 		rec = (HitRecord){ 0 };
 		rec.isHit = worldCastRay(world, &ray, &rec);
