@@ -30,6 +30,8 @@ void cameraInit(Camera* camera, const unsigned int imageWidth, const unsigned in
 	camera->pixel00Location.x = viewportUpperLeft.x + 0.5 * (camera->pixelDeltaU.x + camera->pixelDeltaV.x);
 	camera->pixel00Location.y = viewportUpperLeft.y + 0.5 * (camera->pixelDeltaU.y + camera->pixelDeltaV.y);
 	camera->pixel00Location.z = viewportUpperLeft.z + 0.5 * (camera->pixelDeltaU.z + camera->pixelDeltaV.z);
+
+	camera->maxDepth = 50;
 }
 
 void cameraGenerateRay(const Camera* camera, const Vec2 PixelCoordinates, Ray* rayOut)

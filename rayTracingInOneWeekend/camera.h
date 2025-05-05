@@ -17,6 +17,7 @@ typedef struct Camera
 	Vec3 pixelDeltaV;
 
 	Vec3 pixel00Location;
+	unsigned int maxDepth;
 } Camera;
 
 
