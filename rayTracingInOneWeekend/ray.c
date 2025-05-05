@@ -24,7 +24,8 @@ Vec3 rayColor(const Ray* ray, const HitRecord* hitRecord)
 		return color;
 	}
 
-	double a = 0.5 * (ray->direction.y + 1.0);
+	Vec3 unitDirection = vec3UnitVector(&ray->direction);
+	double a = 0.5 * (unitDirection.y + 1.0);
 	double colorDelta = 1.0 - a;
 
 	color.x = colorDelta * 1.0 + a * 0.5;

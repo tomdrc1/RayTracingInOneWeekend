@@ -12,6 +12,22 @@ double vec3SquareLength(const Vec3* vec)
     return (vec->x * vec->x) + (vec->y * vec->y) + (vec->z * vec->z);
 }
 
+double vec3Length(const Vec3* vec)
+{
+    return sqrt(vec3SquareLength(vec));
+}
+
+Vec3 vec3UnitVector(const Vec3* vec)
+{
+    double vecLength = vec3Length(vec);
+
+    return (Vec3) {
+        vec->x / vecLength,
+        vec->y / vecLength,
+        vec->z / vecLength
+    };
+}
+
 Vec3 vec3RandomVectorConfined(const double min, const double max)
 {
     return (Vec3) {
