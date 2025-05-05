@@ -22,6 +22,7 @@ void worldRender(World* world)
 
 	for (j = 0; j < world->image.height; j++)
 	{
+		printf("\rScanlines remaining: %d \n", (world->image.height - j));
 		for (i = 0; i < world->image.width; i++)
 		{
 			pixelColor = (Vec3){ 0 };
@@ -30,6 +31,10 @@ void worldRender(World* world)
 			pixelColor.x *= world->pixelSampelsScale;
 			pixelColor.y *= world->pixelSampelsScale;
 			pixelColor.z *= world->pixelSampelsScale;
+
+			pixelColor.x = linearToGamma(pixelColor.x);
+			pixelColor.y = linearToGamma(pixelColor.y);
+			pixelColor.z = linearToGamma(pixelColor.z);
 			ppmImageWriteColor(&world->image, pixelColor);
 		}
 	}
@@ -57,15 +62,35 @@ void worldCastRayAntialiasing(const World* world, const Vec2 pixelCoordinates, V
 	int i = 0;
 	Ray ray = { 0 };
 	HitRecord rec = { 0 };
+	int depth = 0;
 
 	for (i = 0; i < world->sampelsPerPixel; i++)
 	{
-		cameraGenerateRay(&world->camera, (Vec2) {pixelCoordinates.x, pixelCoordinates.y}, &ray);
+		cameraGenerateRay(&world->camera, pixelCoordinates, &ray);
 
-		rec = (HitRecord){ 0 };
-		rec.isHit = worldCastRay(world, &ray, &rec);
+		depth = world->camera.maxDepth;
+		Vec3 tempPixelColor = { 1.0, 1.0, 1.0};
 
-		Vec3 tempPixelColor = rayColor(&ray, &rec);
+		do
+		{
+			rec = (HitRecord){ 0 };
+			rec.isHit = worldCastRay(world, &ray, &rec);
+			Vec3 currentPixelColor = rayColor(&ray, &rec);
+
+			tempPixelColor.x *= currentPixelColor.x;
+			tempPixelColor.y *= currentPixelColor.y;
+			tempPixelColor.z *= currentPixelColor.z;
+
+			if (rec.isHit)
+			{
+				Vec3 randomDirection = vec3RandomUnitVector();
+
+				ray.direction.x = rec.normal.x + randomDirection.x;
+				ray.direction.y = rec.normal.y + randomDirection.y;
+				ray.direction.z = rec.normal.z + randomDirection.z;
+				ray.origin = rec.point;
+			}
+		} while (rec.isHit && depth--);
 
 		pixelColorOut->x += tempPixelColor.x;
 		pixelColorOut->y += tempPixelColor.y;
@@ -83,7 +108,7 @@ bool worldCastRay(World* world, const Ray* ray, HitRecord* recordOut)
 
 	for (i = 0; i < world->shapeCount; i++)
 	{
-		interval.min = 0;
+		interval.min = 0.001;
 		interval.max = closest;
 
 		if (world->shapes[i].hitFunc && world->shapes[i].hitFunc(&world->shapes[i], ray, &interval, &tempRecord))

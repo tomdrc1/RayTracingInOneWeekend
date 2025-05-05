@@ -131,6 +131,7 @@
     <ClCompile Include="interval.c" />
     <ClCompile Include="ppmImage.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="random.c" />
     <ClCompile Include="ray.c" />
     <ClCompile Include="shapes\sphere.c" />
     <ClCompile Include="vec3.c" />
