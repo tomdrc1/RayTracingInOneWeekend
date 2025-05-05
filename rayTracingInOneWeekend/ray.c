@@ -17,9 +17,9 @@ Vec3 rayColor(const Ray* ray, const HitRecord* hitRecord)
 	
 	if (hitRecord->isHit)
 	{
-		color.x = 0.5 * (hitRecord->normal.x + 1);
-		color.y = 0.5 * (hitRecord->normal.y + 1);
-		color.z = 0.5 * (hitRecord->normal.z + 1);
+		color.x = 0.5;
+		color.y = 0.5;
+		color.z = 0.5;
 
 		return color;
 	}
