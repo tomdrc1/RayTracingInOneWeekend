@@ -22,6 +22,7 @@ void worldRender(World* world)
 
 	for (j = 0; j < world->image.height; j++)
 	{
+		printf("\rScanlines remaining: %d \n", (world->image.height - j));
 		for (i = 0; i < world->image.width; i++)
 		{
 			pixelColor = (Vec3){ 0 };
@@ -57,15 +58,29 @@ void worldCastRayAntialiasing(const World* world, const Vec2 pixelCoordinates, V
 	int i = 0;
 	Ray ray = { 0 };
 	HitRecord rec = { 0 };
+	int depth = world->camera.maxDepth;
 
 	for (i = 0; i < world->sampelsPerPixel; i++)
 	{
 		cameraGenerateRay(&world->camera, (Vec2) {pixelCoordinates.x, pixelCoordinates.y}, &ray);
+		Vec3 tempPixelColor = { 1.0, 1.0, 1.0};
 
-		rec = (HitRecord){ 0 };
-		rec.isHit = worldCastRay(world, &ray, &rec);
+		do
+		{
+			rec = (HitRecord){ 0 };
+			rec.isHit = worldCastRay(world, &ray, &rec);
+			Vec3 currentPixelColor = rayColor(&ray, &rec);
 
-		Vec3 tempPixelColor = rayColor(&ray, &rec);
+			tempPixelColor.x *= currentPixelColor.x;
+			tempPixelColor.y *= currentPixelColor.y;
+			tempPixelColor.z *= currentPixelColor.z;
+
+			if (rec.isHit)
+			{
+				ray.direction = vec3RandomOnHemisphere(&rec.normal);
+				ray.origin = rec.point;
+			}
+		} while (rec.isHit && depth--);
 
 		pixelColorOut->x += tempPixelColor.x;
 		pixelColorOut->y += tempPixelColor.y;
@@ -83,7 +98,7 @@ bool worldCastRay(World* world, const Ray* ray, HitRecord* recordOut)
 
 	for (i = 0; i < world->shapeCount; i++)
 	{
-		interval.min = 0;
+		interval.min = 0.001;
 		interval.max = closest;
 
 		if (world->shapes[i].hitFunc && world->shapes[i].hitFunc(&world->shapes[i], ray, &interval, &tempRecord))
