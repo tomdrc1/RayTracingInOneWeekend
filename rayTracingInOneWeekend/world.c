@@ -58,11 +58,13 @@ void worldCastRayAntialiasing(const World* world, const Vec2 pixelCoordinates, V
 	int i = 0;
 	Ray ray = { 0 };
 	HitRecord rec = { 0 };
-	int depth = world->camera.maxDepth;
+	int depth = 0;
 
 	for (i = 0; i < world->sampelsPerPixel; i++)
 	{
 		cameraGenerateRay(&world->camera, (Vec2) {pixelCoordinates.x, pixelCoordinates.y}, &ray);
+
+		depth = world->camera.maxDepth;
 		Vec3 tempPixelColor = { 1.0, 1.0, 1.0};
 
 		do
@@ -77,7 +79,11 @@ void worldCastRayAntialiasing(const World* world, const Vec2 pixelCoordinates, V
 
 			if (rec.isHit)
 			{
-				ray.direction = vec3RandomOnHemisphere(&rec.normal);
+				Vec3 randomDirection = vec3RandomUnitVector();
+
+				ray.direction.x = rec.normal.x + randomDirection.x;
+				ray.direction.y = rec.normal.y + randomDirection.y;
+				ray.direction.z = rec.normal.z + randomDirection.z;
 				ray.origin = rec.point;
 			}
 		} while (rec.isHit && depth--);
