@@ -18,7 +18,6 @@ void worldRender(World* world)
 	int i = 0;
 	int j = 0;
 
-	Ray ray = { 0 };
 	Vec3 pixelColor = { 0 };
 
 	for (j = 0; j < world->image.height; j++)
