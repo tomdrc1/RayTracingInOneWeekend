@@ -35,13 +35,3 @@ void worldCastRayAntialiasing(const World* world, const Vec2 pixelCoordinates, V
 
 bool worldCastRay(World* world, const Ray* ray, HitRecord* recordOut);
 void worldAddSphere(World* world, const Vec3 center, const double radius);
-
-inline double linearToGamma(const double linearComponent)
-{
-	if (linearComponent > 0)
-	{
-		return sqrt(linearComponent);
-	}
-
-	return 0;
-}

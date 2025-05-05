@@ -8,6 +8,16 @@
 
 static const Interval PPM_IMAGE_INTENSITY = { 0.000, 0.999 };
 
+inline double linearToGamma(const double linearComponent)
+{
+	if (linearComponent > 0)
+	{
+		return sqrt(linearComponent);
+	}
+
+	return 0;
+}
+
 typedef struct PPMImage
 {
 	FILE* imageFile;
