@@ -31,6 +31,10 @@ void worldRender(World* world)
 			pixelColor.x *= world->pixelSampelsScale;
 			pixelColor.y *= world->pixelSampelsScale;
 			pixelColor.z *= world->pixelSampelsScale;
+
+			pixelColor.x = linearToGamma(pixelColor.x);
+			pixelColor.y = linearToGamma(pixelColor.y);
+			pixelColor.z = linearToGamma(pixelColor.z);
 			ppmImageWriteColor(&world->image, pixelColor);
 		}
 	}
