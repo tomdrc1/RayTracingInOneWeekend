@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="camera.h" />
     <ClInclude Include="interval.h" />
+    <ClInclude Include="materials\material.h" />
     <ClInclude Include="ppmImage.h" />
     <ClInclude Include="random.h" />
     <ClInclude Include="ray.h" />
