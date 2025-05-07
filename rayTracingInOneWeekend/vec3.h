@@ -22,5 +22,6 @@ Vec3 vec3RandomVectorConfined(const double min, const double max);
 Vec3 vec3RandomUnitVector();
 Vec3 vec3RandomOnHemisphere(const Vec3* normal);
 
+bool vec3NearZero(const Vec3* vec);
 
 void vec3Print(const Vec3* vec);

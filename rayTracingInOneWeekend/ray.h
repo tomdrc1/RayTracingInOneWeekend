@@ -3,10 +3,12 @@
 #include <math.h>
 #include <stdbool.h>
 
+#include "materials/material.h"
 #include "vec3.h"
 
 typedef struct HitRecord
 {
+    Material material;
     Vec3 point;
     Vec3 normal;
     double t;

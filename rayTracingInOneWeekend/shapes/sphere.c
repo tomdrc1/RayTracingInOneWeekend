@@ -41,6 +41,7 @@ bool sphereHit(const Shape* shape, const Ray* ray, const Interval* interval, Hit
 		(recordOut->point.z - sphere->center.z) / sphere->radius,
 	};
 	rayRecordSetFaceFormal(ray, recordOut);
+	recordOut->material = sphere->material;
 
 	return true;
 }
