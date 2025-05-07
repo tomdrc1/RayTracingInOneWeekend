@@ -71,6 +71,18 @@ Vec3 vec3RandomOnHemisphere(const Vec3* normal)
     return onUnitSphere;
 }
 
+Vec3 vec3Reflect(const Vec3* vec, const Vec3* other)
+{
+    const double dotProduct = vec3Dot(vec, other);
+
+    return (Vec3)
+    {
+        vec->x - 2 * dotProduct * other->x,
+        vec->y - 2 * dotProduct * other->y,
+        vec->z - 2 * dotProduct * other->z
+    };
+}
+
 bool vec3NearZero(const Vec3* vec)
 {
     const double s = 1e-8;
