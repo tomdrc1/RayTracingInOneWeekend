@@ -23,6 +23,6 @@ typedef struct Ray
 } Ray;
 
 Vec3 rayAt(const Ray* ray, const double t);
-Vec3 rayColor(const Ray* ray, const HitRecord* hitRecord);
+Vec3 rayColorSky(const Ray* ray);
 
 void rayRecordSetFaceFormal(const Ray* ray, HitRecord* record);
