@@ -46,10 +46,7 @@ void worldDestroy(World* world)
 
 	for (i = 0; i < world->shapeCount; i++)
 	{
-		if (world->shapes[i].material.materialData)
-		{
-			free(world->shapes[i].material.materialData);
-		}
+		free(world->shapes[i].material.materialData);
 		free(world->shapes[i].data);
 	}
 
