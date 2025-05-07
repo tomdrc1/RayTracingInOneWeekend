@@ -14,10 +14,20 @@ int main(int argc, char** argv)
 
 	worldInit(&world, imageWidth, imageHeight, 10);
 
-	worldAddSphere(&world, (Vec3){ 0, 0, -1 }, 0.5);
-	worldAddSphere(&world, (Vec3){ 0, -100.5, -1 }, 100);
-	worldAddSphere(&world, (Vec3) { 6, 2, -6 }, 2);
-	worldAddSphere(&world, (Vec3) { -4, 1, -3 }, 1.5);
+	Material ground = { 0 };
+	Material center = { 0 };
+	Material left = { 0 };
+	Material right = { 0 };
+
+	lambertianInit(&ground, (Vec3) { 0.8, 0.8, 0.0 });
+	lambertianInit(&center, (Vec3) { 0.1, 0.2, 0.5 });
+	lambertianInit(&left, (Vec3) { 0.8, 0.8, 0.8 });
+	lambertianInit(&right, (Vec3) { 0.8, 0.6, 0.2 });
+
+	worldAddSphere(&world, (Vec3){ 0, 0, -1 }, 0.5, center);
+	worldAddSphere(&world, (Vec3){ 0, -100.5, -1 }, 100, ground);
+	worldAddSphere(&world, (Vec3) { 6, 2, -6 }, 2, left);
+	worldAddSphere(&world, (Vec3) { -4, 1, -3 }, 1.5, right);
 	worldRender(&world);
 
 	worldDestroy(&world);

@@ -10,5 +10,5 @@ struct HitRecord;
 typedef struct Material
 {
 	void* materialData;
-	bool (*scatterFunc)(const struct Ray* rayIn, const struct HitRecord* rec, Vec3* color, struct Ray* rayOut);
+	void (*scatterFunc)(const struct Ray* rayIn, const struct HitRecord* rec, Vec3* color, struct Ray* rayOut);
 } Material;

@@ -1,5 +1,15 @@
 #include "lambertian.h"
 
+void lambertianInit(Material* material, Vec3 albedo)
+{
+	Lambertian* lambertian = (Lambertian*)malloc(sizeof(Lambertian));
+
+	lambertian->albedo = albedo;
+
+	material->materialData = (void*)lambertian;
+	material->scatterFunc = &lambertianScatter;
+}
+
 void lambertianScatter(const Material* material, const Ray* rayIn, const HitRecord* rec, Vec3* attenuation, Ray* scattered)
 {
 	const Lambertian* lambertian = (Lambertian*)material->materialData;

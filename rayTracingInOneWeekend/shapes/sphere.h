@@ -4,13 +4,11 @@
 #include <math.h>
 
 #include "shape.h"
-#include "../materials/material.h"
 #include "../interval.h"
 #include "../ray.h"
 
 typedef struct Sphere
 {
-	Material material;
 	Vec3 center;
 	double radius;
 } Sphere;
