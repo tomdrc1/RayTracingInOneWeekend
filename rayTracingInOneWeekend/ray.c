@@ -11,18 +11,9 @@ Vec3 rayAt(const Ray* ray, const double t)
 	return at;
 }
 
-Vec3 rayColor(const Ray* ray, const HitRecord* hitRecord)
+Vec3 rayColorSky(const Ray* ray)
 {
 	Vec3 color = { 0 };
-	
-	if (hitRecord->isHit)
-	{
-		color.x = 0.5;
-		color.y = 0.5;
-		color.z = 0.5;
-
-		return color;
-	}
 
 	Vec3 unitDirection = vec3UnitVector(&ray->direction);
 	double a = 0.5 * (unitDirection.y + 1.0);

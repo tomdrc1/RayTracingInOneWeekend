@@ -46,6 +46,10 @@ void worldDestroy(World* world)
 
 	for (i = 0; i < world->shapeCount; i++)
 	{
+		if (world->shapes[i].material.materialData)
+		{
+			free(world->shapes[i].material.materialData);
+		}
 		free(world->shapes[i].data);
 	}
 
@@ -64,32 +68,34 @@ void worldCastRayAntialiasing(const World* world, const Vec2 pixelCoordinates, V
 	HitRecord rec = { 0 };
 	int depth = 0;
 
+	Vec3 currentPixelColor = { 0 };
+	Vec3 tempPixelColor = { 0 };
+
 	for (i = 0; i < world->sampelsPerPixel; i++)
 	{
 		cameraGenerateRay(&world->camera, pixelCoordinates, &ray);
-
 		depth = world->camera.maxDepth;
-		Vec3 tempPixelColor = { 1.0, 1.0, 1.0};
+	
+		tempPixelColor = (Vec3){ 1.0, 1.0, 1.0 };
 
 		do
 		{
 			rec = (HitRecord){ 0 };
 			rec.isHit = worldCastRay(world, &ray, &rec);
-			Vec3 currentPixelColor = rayColor(&ray, &rec);
+			
+			currentPixelColor = (Vec3){ 0 };
+			if (rec.isHit)
+			{
+				rec.material.scatterFunc(&rec.material, &ray, &rec, &currentPixelColor, &ray);
+			}
+			else
+			{
+				currentPixelColor = rayColorSky(&ray);
+			}
 
 			tempPixelColor.x *= currentPixelColor.x;
 			tempPixelColor.y *= currentPixelColor.y;
 			tempPixelColor.z *= currentPixelColor.z;
-
-			if (rec.isHit)
-			{
-				Vec3 randomDirection = vec3RandomUnitVector();
-
-				ray.direction.x = rec.normal.x + randomDirection.x;
-				ray.direction.y = rec.normal.y + randomDirection.y;
-				ray.direction.z = rec.normal.z + randomDirection.z;
-				ray.origin = rec.point;
-			}
 		} while (rec.isHit && depth--);
 
 		pixelColorOut->x += tempPixelColor.x;
@@ -123,7 +129,7 @@ bool worldCastRay(World* world, const Ray* ray, HitRecord* recordOut)
 	return isHit;
 }
 
-void worldAddSphere(World* world, const Vec3 center, const double radius)
+void worldAddSphere(World* world, const Vec3 center, const double radius, const Material material)
 {
 	Sphere* sphere = (Sphere*)malloc(sizeof(Sphere));
 
@@ -135,6 +141,7 @@ void worldAddSphere(World* world, const Vec3 center, const double radius)
 
 	world->shapes[world->shapeCount].hitFunc = &sphereHit;
 	world->shapes[world->shapeCount].data = (void*)sphere;
+	world->shapes[world->shapeCount].material = material;
 
 	world->shapeCount++;
 }

@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="camera.c" />
     <ClCompile Include="interval.c" />
+    <ClCompile Include="materials\lambertian.c" />
     <ClCompile Include="ppmImage.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="random.c" />
@@ -140,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="camera.h" />
     <ClInclude Include="interval.h" />
+    <ClInclude Include="materials\lambertian.h" />
     <ClInclude Include="materials\material.h" />
     <ClInclude Include="ppmImage.h" />
     <ClInclude Include="random.h" />

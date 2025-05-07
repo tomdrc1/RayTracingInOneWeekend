@@ -71,6 +71,12 @@ Vec3 vec3RandomOnHemisphere(const Vec3* normal)
     return onUnitSphere;
 }
 
+bool vec3NearZero(const Vec3* vec)
+{
+    const double s = 1e-8;
+    return (fabs(vec->x) < s) && (fabs(vec->y) < s) && (fabs(vec->z) < s);
+}
+
 void vec3Print(const Vec3* vec)
 {
 	printf("X: %f, Y: %f, Z: %f\n", vec->x, vec->y, vec->z);
