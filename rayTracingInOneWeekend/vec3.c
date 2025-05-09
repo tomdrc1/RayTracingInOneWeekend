@@ -71,6 +71,49 @@ Vec3 vec3RandomOnHemisphere(const Vec3* normal)
     return onUnitSphere;
 }
 
+Vec3 vec3Reflect(const Vec3* vec, const Vec3* other)
+{
+    const double dotProduct = vec3Dot(vec, other);
+
+    return (Vec3)
+    {
+        vec->x - 2 * dotProduct * other->x,
+        vec->y - 2 * dotProduct * other->y,
+        vec->z - 2 * dotProduct * other->z
+    };
+}
+
+Vec3 vec3Refract(const Vec3* vec, const Vec3* other, const double etaiOverEtat)
+{
+    const Vec3 ngativeVec = { -vec->x, -vec->y, -vec->z };
+    const double cosTheta = fmin(vec3Dot(&ngativeVec, other), 1.0);
+    const Vec3 rOutPerp = { 
+        etaiOverEtat * (vec->x + (cosTheta * other->x)),
+        etaiOverEtat * (vec->y + (cosTheta * other->y)),
+        etaiOverEtat * (vec->z + (cosTheta * other->z)),
+    };
+
+    const double rootLength = -sqrt(fabs(1.0 - vec3SquareLength(&rOutPerp)));
+    const Vec3 rOutParallel = {
+        rootLength * other->x,
+        rootLength * other->y,
+        rootLength * other->z
+    };
+
+
+    return (Vec3) {
+        rOutParallel.x + rOutParallel.x,
+        rOutParallel.y + rOutParallel.y,
+        rOutParallel.z + rOutParallel.z,
+    };
+}
+
+bool vec3NearZero(const Vec3* vec)
+{
+    const double s = 1e-8;
+    return (fabs(vec->x) < s) && (fabs(vec->y) < s) && (fabs(vec->z) < s);
+}
+
 void vec3Print(const Vec3* vec)
 {
 	printf("X: %f, Y: %f, Z: %f\n", vec->x, vec->y, vec->z);

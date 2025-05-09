@@ -19,6 +19,12 @@
     <Filter Include="Source Files\shapes">
       <UniqueIdentifier>{b207ca2f-d66b-4a1c-abb3-43e89542a6bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\materials">
+      <UniqueIdentifier>{87ff5511-621b-4175-a233-70055c93e42b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\materials">
+      <UniqueIdentifier>{6427f1ba-19b0-425e-8aea-9b220e9b4bbc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -44,6 +50,12 @@
     </ClCompile>
     <ClCompile Include="interval.c">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="random.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="materials\lambertian.c">
+      <Filter>Source Files\materials</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +88,12 @@
     </ClInclude>
     <ClInclude Include="vec2.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="materials\material.h">
+      <Filter>Header Files\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="materials\lambertian.h">
+      <Filter>Header Files\materials</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
