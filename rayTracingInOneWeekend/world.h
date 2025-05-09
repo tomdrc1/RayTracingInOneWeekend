@@ -15,6 +15,7 @@
 
 #include "materials/lambertian.h"
 #include "materials/metal.h"
+#include "materials/dielectric.h"
 
 #define IMAGE_NAME "image.ppm"
 

@@ -16,7 +16,7 @@ void dielectricScatter(const Material* material, const Ray* rayIn, const HitReco
 	const Dielectric* dielectric = (Dielectric*)material->materialData;
 
 	const double ri = rec->isFrontFace ? (1.0 / dielectric->refractionIndex) : dielectric->refractionIndex;
-	*attenuation = (Vec3){ 1.0, 1.0, 1.0 };
+	*attenuation = dielectric->albedo;
 
 	Vec3 unitDirection = vec3UnitVector(&rayIn->direction);
 	Vec3 refracted = vec3Refract(&unitDirection, &rec->normal, ri);
