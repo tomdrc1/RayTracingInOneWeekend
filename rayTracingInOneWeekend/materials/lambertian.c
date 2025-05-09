@@ -1,6 +1,6 @@
 #include "lambertian.h"
 
-void lambertianInit(Material* material, Vec3 albedo)
+void lambertianInit(Material* material, const Vec3 albedo)
 {
 	Lambertian* lambertian = (Lambertian*)malloc(sizeof(Lambertian));
 
@@ -13,7 +13,7 @@ void lambertianInit(Material* material, Vec3 albedo)
 void lambertianScatter(const Material* material, const Ray* rayIn, const HitRecord* rec, Vec3* attenuation, Ray* scattered)
 {
 	const Lambertian* lambertian = (Lambertian*)material->materialData;
-	Vec3 randomDirection = vec3RandomUnitVector();
+	const Vec3 randomDirection = vec3RandomUnitVector();
 
 	scattered->direction.x = rec->normal.x + randomDirection.x;
 	scattered->direction.y = rec->normal.y + randomDirection.y;

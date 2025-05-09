@@ -13,6 +13,6 @@ typedef struct Lambertian
 	Vec3 albedo;
 } Lambertian;
 
-void lambertianInit(Material* material, Vec3 albedo);
+void lambertianInit(Material* material, const Vec3 albedo);
 
 void lambertianScatter(const Material* material, const Ray* rayIn, const HitRecord* rec, Vec3* attenuation, Ray* scattered);

@@ -14,6 +14,6 @@ typedef struct Dielectric
 	Vec3 albedo;
 } Dielectric;
 
-void dielectricInit(Material* material, Vec3 albedo, const double refractionIndex);
+void dielectricInit(Material* material, const Vec3 albedo, const double refractionIndex);
 
 void dielectricScatter(const Material* material, const Ray* rayIn, const HitRecord* rec, Vec3* attenuation, Ray* scattered);

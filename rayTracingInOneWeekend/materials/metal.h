@@ -13,6 +13,6 @@ typedef struct Metal
 	Vec3 albedo;
 } Metal;
 
-void metalInit(Material* material, Vec3 albedo);
+void metalInit(Material* material, const Vec3 albedo);
 
 void metalScatter(const Material* material, const Ray* rayIn, const HitRecord* rec, Vec3* attenuation, Ray* scattered);

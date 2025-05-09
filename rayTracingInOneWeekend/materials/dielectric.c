@@ -1,6 +1,6 @@
 #include "dielectric.h"
 
-void dielectricInit(Material* material, Vec3 albedo, const double refractionIndex)
+void dielectricInit(Material* material, const Vec3 albedo, const double refractionIndex)
 {
 	Dielectric* dielectric = (Dielectric*)malloc(sizeof(Dielectric));
 
@@ -18,8 +18,8 @@ void dielectricScatter(const Material* material, const Ray* rayIn, const HitReco
 	const double ri = rec->isFrontFace ? (1.0 / dielectric->refractionIndex) : dielectric->refractionIndex;
 	*attenuation = dielectric->albedo;
 
-	Vec3 unitDirection = vec3UnitVector(&rayIn->direction);
-	Vec3 refracted = vec3Refract(&unitDirection, &rec->normal, ri);
+	const Vec3 unitDirection = vec3UnitVector(&rayIn->direction);
+	const Vec3 refracted = vec3Refract(&unitDirection, &rec->normal, ri);
 
 	scattered->origin = rec->point;
 	scattered->direction = refracted;
