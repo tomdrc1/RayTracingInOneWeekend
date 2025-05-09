@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="camera.c" />
     <ClCompile Include="interval.c" />
+    <ClCompile Include="materials\dielectric.c" />
     <ClCompile Include="materials\lambertian.c" />
     <ClCompile Include="materials\metal.c" />
     <ClCompile Include="ppmImage.c" />
@@ -142,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="camera.h" />
     <ClInclude Include="interval.h" />
+    <ClInclude Include="materials\dielectric.h" />
     <ClInclude Include="materials\lambertian.h" />
     <ClInclude Include="materials\material.h" />
     <ClInclude Include="materials\metal.h" />

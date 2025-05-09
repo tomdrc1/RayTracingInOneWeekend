@@ -22,12 +22,12 @@ int main(int argc, char** argv)
 	lambertianInit(&ground, (Vec3) { 0.8, 0.8, 0.0 });
 	lambertianInit(&center, (Vec3) { 0.1, 0.2, 0.5 });
 	metalInit(&left, (Vec3) { 0.8, 0.8, 0.8 });
-	metalInit(&right, (Vec3) { 0.8, 0.6, 0.2 });
+	dielectricInit(&right, (Vec3) { 0.8, 0.6, 0.2 }, 1.5);
 
-	worldAddSphere(&world, (Vec3){ 0, 0, -1 }, 0.5, center);
+	worldAddSphere(&world, (Vec3){ 0, 0, -1.2 }, 0.5, center);
 	worldAddSphere(&world, (Vec3){ 0, -100.5, -1 }, 100, ground);
-	worldAddSphere(&world, (Vec3) { 4, 1, -6 }, 2, left);
-	worldAddSphere(&world, (Vec3) { -4, 1, -3 }, 1.5, right);
+	worldAddSphere(&world, (Vec3) { -1, 0, -1 }, 0.5, left);
+	worldAddSphere(&world, (Vec3) { 1, 0, -1 }, 0.5, right);
 	worldRender(&world);
 
 	worldDestroy(&world);
