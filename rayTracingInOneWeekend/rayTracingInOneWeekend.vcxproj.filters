@@ -57,6 +57,12 @@
     <ClCompile Include="materials\lambertian.c">
       <Filter>Source Files\materials</Filter>
     </ClCompile>
+    <ClCompile Include="materials\metal.c">
+      <Filter>Source Files\materials</Filter>
+    </ClCompile>
+    <ClCompile Include="materials\dielectric.c">
+      <Filter>Source Files\materials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ppmImage.h">
@@ -93,6 +99,12 @@
       <Filter>Header Files\materials</Filter>
     </ClInclude>
     <ClInclude Include="materials\lambertian.h">
+      <Filter>Header Files\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="materials\dielectric.h">
+      <Filter>Header Files\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="materials\metal.h">
       <Filter>Header Files\materials</Filter>
     </ClInclude>
   </ItemGroup>
