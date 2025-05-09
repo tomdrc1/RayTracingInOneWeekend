@@ -14,6 +14,7 @@
 #include "shapes/sphere.h"
 
 #include "materials/lambertian.h"
+#include "materials/metal.h"
 
 #define IMAGE_NAME "image.ppm"
 

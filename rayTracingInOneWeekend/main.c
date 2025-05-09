@@ -26,8 +26,8 @@ int main(int argc, char** argv)
 
 	worldAddSphere(&world, (Vec3){ 0, 0, -1 }, 0.5, center);
 	worldAddSphere(&world, (Vec3){ 0, -100.5, -1 }, 100, ground);
-	worldAddSphere(&world, (Vec3) { 4, 1, -6 }, 2, right);
-	worldAddSphere(&world, (Vec3) { -4, 1, -3 }, 1.5, left);
+	worldAddSphere(&world, (Vec3) { 4, 1, -6 }, 2, left);
+	worldAddSphere(&world, (Vec3) { -4, 1, -3 }, 1.5, right);
 	worldRender(&world);
 
 	worldDestroy(&world);
