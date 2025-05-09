@@ -88,16 +88,16 @@ Vec3 vec3Refract(const Vec3* vec, const Vec3* other, const double etaiOverEtat)
     const Vec3 ngativeVec = { -vec->x, -vec->y, -vec->z };
     const double cosTheta = fmin(vec3Dot(&ngativeVec, other), 1.0);
     const Vec3 rOutPerp = { 
-        etaiOverEtat * (vec->x + cosTheta * other->x),
-        etaiOverEtat * (vec->y + cosTheta * other->y),
-        etaiOverEtat * (vec->z + cosTheta * other->z),
+        etaiOverEtat * (vec->x + (cosTheta * other->x)),
+        etaiOverEtat * (vec->y + (cosTheta * other->y)),
+        etaiOverEtat * (vec->z + (cosTheta * other->z)),
     };
 
     const double rootLength = -sqrt(fabs(1.0 - vec3SquareLength(&rOutPerp)));
     const Vec3 rOutParallel = {
-        rootLength * rOutPerp.x,
-        rootLength * rOutPerp.y,
-        rootLength * rOutPerp.z
+        rootLength * other->x,
+        rootLength * other->y,
+        rootLength * other->z
     };
 
 
