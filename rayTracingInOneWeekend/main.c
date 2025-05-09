@@ -24,10 +24,10 @@ int main(int argc, char** argv)
 	metalInit(&left, (Vec3) { 0.8, 0.8, 0.8 });
 	dielectricInit(&right, (Vec3) { 0.8, 0.6, 0.2 }, 1.5);
 
-	worldAddSphere(&world, (Vec3){ 0, 0, -1 }, 0.5, center);
+	worldAddSphere(&world, (Vec3){ 0, 0, -1.2 }, 0.5, center);
 	worldAddSphere(&world, (Vec3){ 0, -100.5, -1 }, 100, ground);
-	worldAddSphere(&world, (Vec3) { 4, 1, -6 }, 2, left);
-	worldAddSphere(&world, (Vec3) { -4, 1, -3 }, 1.5, right);
+	worldAddSphere(&world, (Vec3) { -1, 0, -1 }, 0.5, left);
+	worldAddSphere(&world, (Vec3) { 1, 0, -1 }, 0.5, right);
 	worldRender(&world);
 
 	worldDestroy(&world);

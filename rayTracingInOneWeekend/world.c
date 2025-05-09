@@ -9,7 +9,7 @@ void worldInit(World* world, const unsigned int imageWidth, const unsigned int i
 	world->shapes = (Shape*)malloc(sizeof(Shape) * shapeCount);
 	world->shapeCount = 0;
 
-	world->sampelsPerPixel = 100;
+	world->sampelsPerPixel = 10;
 	world->pixelSampelsScale = 1.0 / (double)world->sampelsPerPixel;
 }
 
