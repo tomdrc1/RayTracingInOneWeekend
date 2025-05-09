@@ -83,6 +83,31 @@ Vec3 vec3Reflect(const Vec3* vec, const Vec3* other)
     };
 }
 
+Vec3 vec3Refract(const Vec3* vec, const Vec3* other, const double etaiOverEtat)
+{
+    const Vec3 ngativeVec = { -vec->x, -vec->y, -vec->z };
+    const double cosTheta = fmin(vec3Dot(&ngativeVec, other), 1.0);
+    const Vec3 rOutPerp = { 
+        etaiOverEtat * (vec->x + cosTheta * other->x),
+        etaiOverEtat * (vec->y + cosTheta * other->y),
+        etaiOverEtat * (vec->z + cosTheta * other->z),
+    };
+
+    const double rootLength = -sqrt(fabs(1.0 - vec3SquareLength(&rOutPerp)));
+    const Vec3 rOutParallel = {
+        rootLength * rOutPerp.x,
+        rootLength * rOutPerp.y,
+        rootLength * rOutPerp.z
+    };
+
+
+    return (Vec3) {
+        rOutParallel.x + rOutParallel.x,
+        rOutParallel.y + rOutParallel.y,
+        rOutParallel.z + rOutParallel.z,
+    };
+}
+
 bool vec3NearZero(const Vec3* vec)
 {
     const double s = 1e-8;
