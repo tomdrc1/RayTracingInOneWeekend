@@ -2,13 +2,17 @@
 
 void cameraInit(Camera* camera, const unsigned int imageWidth, const unsigned int imageHeight)
 {
-	double focalLength = 1.0;
-	double viewportHeight = 2.0;
-	double viewportWidth = viewportHeight * ((double)imageWidth / (double)imageHeight);
-
 	camera->center.x = 0;
 	camera->center.y = 0;
 	camera->center.z = 0;
+
+	camera->vfov = 140;
+
+	const double theta = camera->vfov * M_PI / 180.0;
+	const double h = tan(theta / 2.0);
+	const double focalLength = 1.0;
+	const double viewportHeight = 2.0 * h * focalLength;
+	const double viewportWidth = viewportHeight * ((double)imageWidth / (double)imageHeight);
 
 	Vec3 viewportU = { viewportWidth, 0, 0 };
 	Vec3 viewportV = { 0, -viewportHeight, 0 };
