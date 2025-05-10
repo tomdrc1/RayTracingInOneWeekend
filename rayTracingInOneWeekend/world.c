@@ -7,6 +7,7 @@ void worldInit(World* world, const unsigned int imageWidth, const unsigned int i
 	ppmImageInit(&world->image, IMAGE_NAME, imageWidth, imageHeight);
 
 	world->shapes = (Shape*)malloc(sizeof(Shape) * shapeCount);
+	memset(world->shapes, NULL, sizeof(Shape) * shapeCount);
 	world->shapeCount = 0;
 
 	world->sampelsPerPixel = 10;
