@@ -75,8 +75,7 @@ Vec3 vec3Reflect(const Vec3* vec, const Vec3* other)
 {
     const double dotProduct = vec3Dot(vec, other);
 
-    return (Vec3)
-    {
+    return (Vec3) {
         vec->x - 2 * dotProduct * other->x,
         vec->y - 2 * dotProduct * other->y,
         vec->z - 2 * dotProduct * other->z
@@ -105,6 +104,15 @@ Vec3 vec3Refract(const Vec3* vec, const Vec3* other, const double etaiOverEtat)
         rOutParallel.x + rOutParallel.x,
         rOutParallel.y + rOutParallel.y,
         rOutParallel.z + rOutParallel.z,
+    };
+}
+
+Vec3 vec3Cross(const Vec3* vec, const Vec3* other)
+{
+    return (Vec3) {
+        (vec->y * other->z) - (vec->z * other->y),
+        (vec->z * other->x) - (vec->x * other->z),
+        (vec->x * other->y) - (vec->y * other->X)
     };
 }
 
