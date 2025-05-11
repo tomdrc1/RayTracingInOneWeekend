@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <corecrt_math_defines.h>
 
 #include "random.h"
 #include "vec2.h"
@@ -12,12 +13,18 @@
 typedef struct Camera
 {
 	Vec3 center;
+	Vec3 lookFrom;
+	Vec3 lookAt;
+	Vec3 vUp;
 
 	Vec3 pixelDeltaU;
 	Vec3 pixelDeltaV;
 
 	Vec3 pixel00Location;
 	unsigned int maxDepth;
+
+	double vfov;
+
 } Camera;
 
 
