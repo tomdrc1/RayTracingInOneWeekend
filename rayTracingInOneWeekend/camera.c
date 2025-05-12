@@ -1,9 +1,9 @@
 #include "camera.h"
 
-void cameraInit(Camera* camera, const unsigned int imageWidth, const unsigned int imageHeight)
+void cameraInit(Camera* camera, const Vec3 lookFrom, const Vec3 lookAt, const unsigned int imageWidth, const unsigned int imageHeight)
 {
-	camera->lookFrom = (Vec3){ -2, 2, 1 };
-	camera->lookAt = (Vec3){ 0, 0, -1 };
+	camera->lookFrom = lookFrom;
+	camera->lookAt = lookAt;
 	camera->vUp = (Vec3){ 0, 1, 0 };
 	camera->center = camera->lookFrom;
 

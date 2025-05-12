@@ -28,6 +28,6 @@ typedef struct Camera
 } Camera;
 
 
-void cameraInit(Camera* camera, const unsigned int imageWidth, const unsigned int imageHeight);
+void cameraInit(Camera* camera, const Vec3 lookFrom, const Vec3 lookAt, const unsigned int imageWidth, const unsigned int imageHeight);
 void cameraGenerateRay(const Camera* camera, const Vec2 PixelCoordinates, Ray* rayOut);
 void cameraDestroy(Camera* camera);
