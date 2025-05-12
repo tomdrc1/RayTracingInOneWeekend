@@ -20,11 +20,11 @@ double vec3Length(const Vec3* vec);
 Vec3 vec3UnitVector(const Vec3* vec);
 Vec3 vec3RandomVectorConfined(const double min, const double max);
 Vec3 vec3RandomUnitVector();
+Vec3 vec3RandomInUnitDisk();
 Vec3 vec3RandomOnHemisphere(const Vec3* normal);
 Vec3 vec3Reflect(const Vec3* vec, const Vec3* other);
 Vec3 vec3Refract(const Vec3* vec, const Vec3* other, const double etaiOverEtat);
 Vec3 vec3Cross(const Vec3* vec, const Vec3* other);
-
 
 bool vec3NearZero(const Vec3* vec);
 

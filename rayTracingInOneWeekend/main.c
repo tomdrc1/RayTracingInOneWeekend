@@ -12,7 +12,7 @@ int main(int argc, char** argv)
 
 	World world;
 
-	worldInit(&world, imageWidth, imageHeight, 10);
+	worldInit(&world, (Vec3) { -2, 2, 10 }, (Vec3) { 0, 0, -1 }, imageWidth, imageHeight, 10);
 
 	Material ground = { 0 };
 	Material center = { 0 };

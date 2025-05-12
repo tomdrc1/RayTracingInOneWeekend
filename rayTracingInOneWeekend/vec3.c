@@ -41,9 +41,9 @@ Vec3 vec3RandomUnitVector()
 {
     while (true)
     {
-        Vec3 point = vec3RandomVectorConfined(-1, 1);
+        const Vec3 point = vec3RandomVectorConfined(-1, 1);
+        const double lensq = vec3SquareLength(&point);
 
-        double lensq = vec3SquareLength(&point);
         if (1e-160 < lensq && lensq <= 1)
         {
             const double lensqRoot = sqrt(lensq);
@@ -53,6 +53,20 @@ Vec3 vec3RandomUnitVector()
                 point.y / lensqRoot,
                 point.z / lensqRoot
             };
+        }
+    }
+}
+
+Vec3 vec3RandomInUnitDisk()
+{
+    while (true)
+    {
+        const Vec3 point = { randomDoubleConfined(-1,1), randomDoubleConfined(-1, 1), 0 };
+        const double pointLength = vec3Length(&point);
+
+        if (pointLength < 1)
+        {
+            return point;
         }
     }
 }
