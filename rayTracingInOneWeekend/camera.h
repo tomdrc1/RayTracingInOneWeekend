@@ -28,6 +28,9 @@ typedef struct Camera
 	double vfov;
 	double defocusAngle;
 	double focusDist;
+
+	unsigned int samplesPerPixel;
+	double pixelSamplesScale;
 } Camera;
 
 

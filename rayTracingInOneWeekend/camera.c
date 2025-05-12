@@ -8,6 +8,11 @@ void cameraInit(Camera* camera, const Vec3 lookFrom, const Vec3 lookAt, const un
 	camera->defocusAngle = 10;
 	camera->focusDist = 3.4;
 
+	camera->maxDepth = 50;
+
+	camera->samplesPerPixel = 100;
+	camera->pixelSamplesScale = 1.0 / (double)camera->samplesPerPixel;
+
 	const double theta = degreesToRadians(camera->vfov);
 	const double h = tan(theta / 2.0);
 	const double viewportHeight = 2.0 * h * camera->focusDist;
@@ -71,8 +76,6 @@ void cameraInit(Camera* camera, const Vec3 lookFrom, const Vec3 lookAt, const un
 		v.y * defocusRadius,
 		v.z * defocusRadius
 	};
-
-	camera->maxDepth = 50;
 }
 
 void cameraGenerateRay(const Camera* camera, const Vec2 PixelCoordinates, Ray* rayOut)

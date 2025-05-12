@@ -26,9 +26,6 @@ typedef struct World
 
 	Shape* shapes;
 	unsigned int shapeCount;
-
-	unsigned int sampelsPerPixel;
-	double pixelSampelsScale;
 } World;
 
 void worldInit(World* world, const Vec3 lookFrom, const Vec3 lookAt, const unsigned int imageWidth, const unsigned int imageHeight, const unsigned int shapeCount);

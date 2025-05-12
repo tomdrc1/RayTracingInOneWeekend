@@ -9,9 +9,6 @@ void worldInit(World* world, const Vec3 lookFrom, const Vec3 lookAt, const unsig
 	world->shapes = (Shape*)malloc(sizeof(Shape) * shapeCount);
 	memset(world->shapes, NULL, sizeof(Shape) * shapeCount);
 	world->shapeCount = 0;
-
-	world->sampelsPerPixel = 10;
-	world->pixelSampelsScale = 1.0 / (double)world->sampelsPerPixel;
 }
 
 void worldRender(World* world)
@@ -29,9 +26,9 @@ void worldRender(World* world)
 			pixelColor = (Vec3){ 0 };
 			worldCastRayAntialiasing(world, (Vec2) { i, j }, &pixelColor);
 
-			pixelColor.x *= world->pixelSampelsScale;
-			pixelColor.y *= world->pixelSampelsScale;
-			pixelColor.z *= world->pixelSampelsScale;
+			pixelColor.x *= world->camera.pixelSamplesScale;
+			pixelColor.y *= world->camera.pixelSamplesScale;
+			pixelColor.z *= world->camera.pixelSamplesScale;
 
 			pixelColor.x = linearToGamma(pixelColor.x);
 			pixelColor.y = linearToGamma(pixelColor.y);
@@ -69,7 +66,7 @@ void worldCastRayAntialiasing(const World* world, const Vec2 pixelCoordinates, V
 	Vec3 currentPixelColor = { 0 };
 	Vec3 tempPixelColor = { 0 };
 
-	for (i = 0; i < world->sampelsPerPixel; i++)
+	for (i = 0; i < world->camera.samplesPerPixel; i++)
 	{
 		cameraGenerateRay(&world->camera, pixelCoordinates, &ray);
 		depth = world->camera.maxDepth;
