@@ -8,7 +8,9 @@ void worldInit(World* world, const Vec3 lookFrom, const Vec3 lookAt, const unsig
 
 	world->shapes = (Shape*)malloc(sizeof(Shape) * shapeCount);
 	memset(world->shapes, NULL, sizeof(Shape) * shapeCount);
+
 	world->shapeCount = 0;
+	world->maxShapes = shapeCount;
 }
 
 void worldRender(World* world)
@@ -79,7 +81,7 @@ void worldCastRayAntialiasing(const World* world, const Vec2 pixelCoordinates, V
 			rec.isHit = worldCastRay(world, &ray, &rec);
 			
 			currentPixelColor = (Vec3){ 0 };
-			if (rec.isHit)
+			if (rec.isHit && rec.material.scatterFunc)
 			{
 				rec.material.scatterFunc(&rec.material, &ray, &rec, &currentPixelColor, &ray);
 			}
@@ -126,6 +128,13 @@ bool worldCastRay(World* world, const Ray* ray, HitRecord* recordOut)
 
 void worldAddSphere(World* world, const Vec3 center, const double radius, const Material material)
 {
+	if (world->shapeCount >= world->maxShapes)
+	{
+		printf("Exceeded shape limit!\nNot adding shape!\nFreeing material!\n");
+		free(material.materialData);
+		return;
+	}
+
 	Sphere* sphere = (Sphere*)malloc(sizeof(Sphere));
 
 	sphere->center.x = center.x;

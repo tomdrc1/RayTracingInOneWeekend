@@ -5,12 +5,12 @@ void cameraInit(Camera* camera, const Vec3 lookFrom, const Vec3 lookAt, const un
 	camera->center = lookFrom;
 	camera->vfov = 20;
 
-	camera->defocusAngle = 10;
-	camera->focusDist = 3.4;
+	camera->defocusAngle = 0.6;
+	camera->focusDist = 10.0;
 
 	camera->maxDepth = 50;
 
-	camera->samplesPerPixel = 100;
+	camera->samplesPerPixel = 500;
 	camera->pixelSamplesScale = 1.0 / (double)camera->samplesPerPixel;
 
 	const double theta = degreesToRadians(camera->vfov);
